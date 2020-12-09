@@ -12,7 +12,16 @@ public class Sandwich extends Food
         super("Сэндвич");
         this.filling1 = Filling1;
         this.filling2 = Filling2;
+    }
+    public Sandwich(Food Filling1)
+    {
+        super("Сэндвич");
+        this.filling1 = Filling1;
 
+    }
+    public Sandwich()
+    {
+        super("Сэндвич");
 
     }
 
@@ -32,10 +41,24 @@ public class Sandwich extends Food
     @Override
     public int calculateCalories()
     {
-        return filling1.calculateCalories() + filling2.calculateCalories();
+        if(this.filling1!=null&&this.filling2!=null){
+        return filling1.calculateCalories() + filling2.calculateCalories();}
+        else if(this.filling1!=null&&this.filling2==null)
+        {return filling1.calculateCalories(); }
+        else if(this.filling1==null&&this.filling2==null)
+        {
+            return 100;
+        }
+        return 0;
     }
     @Override
     public void consume() {
-        System.out.println(this + " c " + this.filling1 + " и " + this.filling2 + " Съеден");
+        if(this.filling1!=null&&this.filling2!=null)
+        { System.out.println(this + " c " + this.filling1 + " и " + this.filling2 + " Съеден");}
+        else if(this.filling1!=null&&this.filling2==null){
+            System.out.println(this + " c " + this.filling1  + " Съеден");
+        }else if(this.filling1==null&&this.filling2==null){
+            System.out.println(this + " Съеден");
     }
+}
 }

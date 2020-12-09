@@ -17,30 +17,40 @@ public class MainAppication
                     else
                         break;
                 System.out.println("Общая калорийность завтрака: " + howManyCaloriesInBreakfast);
-            } else if (arg.equals("-sort")) {
+            }
+            else if (arg.equals("-sort")) {
                 Arrays.sort(breakfast, new Comparator<Food>() {
                     public int compare(Food a, Food b) {
+                        if (a==null) return 1;
+                        if (b==null) return -1;
                         return b.toString().length() - a.toString().length();
                     }
                 });
                 System.out.println("Отсортированный вариант:");
-            } else {
+                }
+                else
+                {
                 String[] parts = arg.split("/");
-
-
-                Class myClass = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[0]);
-
-
-                if (parts.length == 1) {
+                if (parts.length == 1)
+                  {  Class myClass = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[0]);
                     Constructor constructor = myClass.getConstructor();
                     breakfast[itemsSoFar] = (Food) constructor.newInstance();
                     itemsSoFar++;
-                } else if (parts.length == 2) {
+                  }
+                else
+                if (parts.length == 2)
+                {  Class myClass = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[0]);
+                    Class myClass1 = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[1]);
+                    Constructor constructor1 = myClass1.getConstructor();
                     Constructor constructor = myClass.getConstructor(Food.class);
-                    breakfast[itemsSoFar] = (Food) constructor.newInstance(parts[1]);
-                    itemsSoFar++;
+                    breakfast[itemsSoFar] = (Food) constructor.newInstance(constructor1.newInstance());
+
+                itemsSoFar++;
+
                 }
+                else
                 if (parts.length == 3) {
+                    Class myClass = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[0]);
                     Class myClass1 = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[1]);
                     Class myClass2 = Class.forName("bsu.rfe.java.group9.lab1.Kutsis.var13." + parts[2]);
                     Constructor constructor1 = myClass1.getConstructor();
@@ -51,6 +61,7 @@ public class MainAppication
                 }
             }
         }
+
 
         for (Food item : breakfast) {
             if (item != null) {
